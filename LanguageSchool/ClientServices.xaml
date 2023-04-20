@@ -1,0 +1,66 @@
+﻿<Window x:Class="LanguageSchool.ClientServices"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageSchool"
+        mc:Ignorable="d"
+        Title="ClientServices" Height="720" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="GoBackBtn" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Click="GoBackBtn_Click"></Button>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="400 0 0 0" Text="Записи клиентов" FontSize="30"></TextBlock>
+        </StackPanel>
+        <ListView Margin="10" Grid.Row="1" Grid.Column="1" x:Name="ClientServicesList" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Услуга:"></TextBlock>
+                            <TextBlock Text="{Binding Path=Service.Title}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ФИО клиента:"></TextBlock>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                        <Binding Path="Client.FirstName"></Binding>
+                                        <Binding Path="Client.LastName"></Binding>
+                                        <Binding Path="Client.Patronymic"></Binding>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Номер телефона:"></TextBlock>
+                            <TextBlock Text="{Binding Path=Client.Phone}"></TextBlock>
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Почта:"></TextBlock>
+                            <TextBlock Text="{Binding Path=Client.Email}"></TextBlock>
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Дата записи:"></TextBlock>
+                            <TextBlock Text="{Binding Path=StartTime, StringFormat='dd.MM.yyyy hh:mm'}"></TextBlock>
+                        </StackPanel>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
